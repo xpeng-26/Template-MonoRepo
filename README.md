@@ -57,7 +57,57 @@ This is where we explore cutting-edge techniques and ideas. Work here is experim
 
 ## Contributing
 
-This is currently a private R&D repository, but we will collaborate internally.
+
+### Tools
+
+1. `pyenv` to manage the Python virson.
+2. `uv` to manage the dependencies. ![UV Project](https://docs.astral.sh/uv/concepts/projects/). ![UV Features](https://docs.astral.sh/uv/getting-started/features/#scripts)
+3. `git`
+4. `pre-commit` and `ruff`
+5. `pytest`
+
+### Creating a new project (subrepos)
+
+```bash
+mkdir hello-world
+cd hello-world
+
+git init
+pyenv local 3.12
+uv init
+
+uv add pre-commit
+uv add ruff
+uv add pytest
+```
+
+### Managing dependencies
+
+```bash
+# activate the environment
+source .venv/bin/activate
+# add a new package
+uv add requests
+# remove a installed package
+uv remove requests
+# upgrade a installed package
+uv lock --upgrade-package requests
+```
+
+### Development
+
+```bash
+source .venv/bin/activate
+uv run example.py
+# when calling uv run, it will automaticly lock and sync the environment, which is equvilent to
+# uv lock
+# uv sync
+
+git add .
+# ✨ This command will trigger the pre-commit hooks, automatically running ruff and commitlint
+git commit -m "feat: add amazing new feature"
+git push origin main
+```
 
 ---
 Made with ❤️ and a little bit of AI magic.
